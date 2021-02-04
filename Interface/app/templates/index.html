@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>QuorridorIA</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <script type="text/javascript" src="../static/js/globals.js"></script>
+    <script type="text/javascript" src="../static/js/game.js"></script>
+    <script type="text/javascript" src="../static/js/graphics.js"></script>
+  </head>
+  <body onload="draw()">
+    <br>
+    <div class="container card bg-dark">
+        <canvas id="board"></canvas>
+      </div>
+        <br>
+      <div class="container card bg-dark">
+          <br>
+          <!-- Input -->
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Coup :</span>
+              </div>
+            <input type="text" class="form-control" id="userInput" placeholder="Entrer un coup" aria-label="Coup" aria-describedby="basic-addon1">
+          </div>
+      </div>
+    <br>
+      <div class="container card bg-dark">
+          <br>
+          <p class="text-light">
+            Bonjour, je suis QBot, le bot explicateur de QuoridorIA. <br>
+            En quoi puis-je vous aider ?
+          </p>
+          <!-- Chat Bot -->
+          <div class="input-group mb-1">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon2">Vous :</span>
+              </div>
+            <input type="text" class="form-control" id="questionInput" placeholder="Poser une question" aria-label="Question" aria-describedby="basic-addon2">
+              <br>
+          </div>
+          <br>
+          <div class="input-group mb-1">
+              <br>
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">QBot :</span>
+              </div>
+              <input type="text" class="form-control" id="qbotResponse" placeholder="Réponse de qbot" aria-label="Reponse" aria-describedby="basic-addon3" readonly>
+          </div>
+          <br>
+      </div>
+
+    <script type="text/javascript" src="../static/js/link.js"></script>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\title{Rapport: Projet Technique d'intelligence artificielle}
+\author{Victor Schmit, Martin Balfroid}
+\date{2019-2020}
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+
+\tableofcontents
+\pagebreak
+\section{Introduction}
+Dans le cadre du cours de Techniques d'intelligence artificielle, nous avons été amené à faire ce projet. Le projet est basé sur le jeu Quoridor, un jeu de stratégie qui se joue sur une échiquier où les quatre joueurs ont leur pions placé au départ sur le milieu d'une bordure. Le but du jeu est de déplacer le pions sur la bordure d'en face. Il est aussi possible de placer des barrière qui bloqueront le déplacement entre deux cases. Ces barrières peuvent-être placée verticallement ou horizontalement.
+Ce projet contient trois majeures parties qui seront plus détaillée-ci dessous:
+\\
+\begin{itemize}
+	\item L'interface Web qui permet de visualisé du point de vue de l'utilisateur le jeu ainsi que d'avoir un accès direct au chatbot.
+	\item Le chatbot, appelé qbot. Ce bot à pour but de vous donner des explications sur le jeu. Vous lui poser une questions, et celui-ci y reponds. Il peut aussi vous proposer un coup à jouer grâce à la partie trois du projet.
+	\item L'intelligence artificielle, QuordidorAI. Cette intelligence artificielle vous propose le meilleur coup à jouer afin de vous rendre le plur rapidement sur la bordure oposée afin de gagner le jeu.
+\end{itemize}
+\pagebreak
+
+\section{Methodologie}
+La méthodologie de ce projet fut un peu chaotique. En effet, Martin Balfroid et moi-même (Victor Schmit) avons été pris au dépourvu dans la cadre de ce projet, et d'autres projets, lorsque nous avons compris que Sami Quolin ne participerait pas à ceux-ci. Il nous promettait toujours de nous rendre sa partie et d'avancer. Cependant, il ne réponds plus à nos messages et ne nous a jamais rien envoyé. Agissant de cette manière dans les différents projets avec lesquels nous sommes avec lui, nous avons pris beaucoup de retard. La méthodologie a donc du être adaptée. Nous avons commencé par réalisé le chatbot en prolog. Nous avons ensuite réalisé l'intelligence artificielle et enfin nous avons fait l'interface web.
+Nous avons décidé de terminer par l'interface web car nous avions peur de ne pas avoir assez de temps pour pouvoir la réaliser. Celle-ci est maintenant terminée.
+\pagebreak
+\section{Remarque sur la reprise de code}
+Nous souhaitons remercier les groupes de Germain Herbay et de Stéphane Leblanc qui nous ont permis de pouvoir faire la liaison entre notre interface web et notre code Prolog. Stéphane Leblanc nous a aidé a intégré dans notre code prolog le nécessaire pour cette liaison avec JavaScript.
+\pagebreak
+\section{Interface Web}
+Pour l'interface web, nous avons décidé de la créer de par nous même. Nous avons décider de la créer à partir de JavaScript. De tel manière, nous avons eu plus facile pour y intégrer le jeu Quroidor. 
+\\
+Pour la connecter aux deux fichiers prolog, nous avons utilisé le Github que Monsieur Jacquet nous a partagé: 
+\\
+\url{https ://gist.github.com/willprice/684291f147151db86f531fdec31b36be}
+\\
+En intégrant le nécessaire, nous avons pu faire communiqué le chatbot à l'interface. Malheureusement, avec le manque de temps, nous n'avons pas su connecté l'IA. Comme vous aurez pu le constater dans la vidéo et dans le code, l'IA a bien été créée, elle n'est cependant pas fonctionnelle avec notre interface graphique.
+\\
+Au vu de ce problème, nous avons pu rapidemment complèter le JavaScript du site afin de rendre le jeu quand même jouable. Et le chatbot est disponnible de même. N'hésitez donc pas à le tester!
+\pagebreak
+\section{Chatbot}
+Le chatBot est principalement constitué de différentes \texttt{regle\_rep}. Ces règles répondent au questions proposées dans l'énnoncé. Pour ces questions-réponses, nous avons donc du créer une \texttt{regle\_rep} pour chaque question ainsi que un \texttt{mclef} qui nous permets de trouver ces règles.
+\\
+En voici un exemple:
+\begin{verbatim}
+mclef(deplacer,5).
+regle_rep(deplacer, 1,
+   [3,[deplacer], 3 , [barriere]],
+   [ [ non, vous, ne, pouvez, "pas." ] ] ).
+\end{verbatim}
+La question que l'utilisateur poserai pourrait donc être:
+\\
+\texttt{Puis-je deplacer une barriere}
+\\
+Et la réponse du chatbot sera donc:
+\\
+\texttt{Non vous ne pouvez pas}
+\\
+Afin de rendre le chatbot un peu plus flexible, nous avons décidé d'y intégrer un algorithme de levenshtein. Celui-ci permet à l'utilisateur, selon un certain degré de certidude, de faire des faute de frappe dans sa quetion.
+Cet algorithme est utilisé grâce au module \texttt{isub/4}.
+\\
+Lorsque nous utilisons \texttt{match\_pattern}, nous allons regardé une règle que nous créons: \texttt{numbSimilarity}. Cette règle va aller donc vérifier l'input de l'utilisateur et utiliser d'autre règle comme \texttt{check\_useful} (qui va vérifier si les mot ne sont pas non necessaire comme les mot: La, le, les, des, etc) et va renvoyer la similarité.
+\pagebreak
+\section{QuoridorAI: Intelligence artificielle}
+Pour la partie intelligence artificielle, nous nous y sommes attelé très rapidemment.
+Nous avons commencé par créer toutes les règles nécessaire à celle-ci tels que le deplacement, l'ajout de barrière, la vérification que celle-ci ne soit pas sur un endroit où elle n'a pas le droit d'être. Mais aussi des règles plus compliquée comme la règle du saute mouton (ou leapfrog nommée dans notre code). Cette règle est assez compliquée à vérifier car il est possible de sauter au dessus du pion en diagonal si une barrière est placée derrière celui-ci.
+Pour terminer, nous avons implémenter notre intelligence artificielle qui est très naïve. Nous savons bien qu'elle est loin d'être parfaite. Elle va calculer le chemin le plus court possible opur atteindre le bord qu'un pion.
+\\
+Nous avons donc créer notre intelligence artificielle avec JavaScript pour avoir plus de fa
+\pagebreak
+\section{Remarques}
+Au vu de nos difficultés pour la réalisation du projet, nous n'avons pas su rendre quelque chose de parfait. Les améliorations pour le projet sont nombreuses. Le problèmes de ce manque de temps réside principalement dans le fait de n'être que deux pour travailler mais aussi des problèmes de communications. En effet, travailler via appel est beaucoup plus compliqué que de pouvoir se voir et de travailler l'un à côté de l'autre.
+\pagebreak
+\section{Conclusion}
+En conclusion, nous ne trouvons pas que notre projet est parfait. Enormément d'amélioration pourrait-être fait à celui-ci. Cependant, au vu du manque de temps et de moyen du groupe, nous n'avons pas su complèter plus celui-ci. Nous sommes quand même très content d'avoir terminer et qu'il fonctionne.
+Ce projet nous a beaucoup appris sur l'utilisation de Prolog dans le cadre de la réalisation d'une chatbot ainsi que d'une intelligence artificielle.
+\end{document}
